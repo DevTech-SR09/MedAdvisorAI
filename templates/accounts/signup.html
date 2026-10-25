@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign Up | MedAdvisor AI{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet"
+      href="{% static 'css/signup.css' %}">
+
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+
+        <!-- ==========================================
+             LEFT PANEL
+        =========================================== -->
+
+        <div class="auth-left">
+
+            <div class="brand">
+                ❤️ <span>MedAdvisor AI</span>
+            </div>
+
+            <h1>
+                Create Account
+            </h1>
+
+            <h3>
+                Predict. Prevent. Live Better.
+            </h3>
+
+            <p>
+                Join MedAdvisor AI and begin your personalized
+                heart-health journey with AI-powered disease
+                prediction, diet, exercise, and healthcare
+                recommendations.
+            </p>
+
+            <img
+                src="{% static 'images/heart.png' %}"
+                alt="Heart"
+                class="heart-image"
+            >
+
+            <div class="quote">
+
+                “Your heart deserves intelligent care
+                and early prediction.”
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             RIGHT PANEL
+        =========================================== -->
+
+        <div class="auth-right">
+
+            <h2>
+                Sign Up
+            </h2>
+
+            <p class="subtitle">
+                Create your MedAdvisor AI account
+            </p>
+
+
+            <!-- ======================================
+                 FORM ERRORS
+            ======================================= -->
+
+            {% if form.errors %}
+
+                <div class="form-errors">
+
+                    {% for field in form %}
+
+                        {% for error in field.errors %}
+
+                            <p>
+                                ⚠️ {{ error }}
+                            </p>
+
+                        {% endfor %}
+
+                    {% endfor %}
+
+
+                    {% for error in form.non_field_errors %}
+
+                        <p>
+                            ⚠️ {{ error }}
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- ======================================
+                 SIGNUP FORM
+            ======================================= -->
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- Username -->
+
+                <div class="input-group">
+
+                    <i>👤</i>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        value="{{ form.username.value|default:'' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="input-group">
+
+                    <i>📧</i>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email Address"
+                        value="{{ form.email.value|default:'' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="input-group">
+
+                    <i>🔒</i>
+
+                    <input
+                        type="password"
+                        name="password1"
+                        placeholder="Password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Confirm Password -->
+
+                <div class="input-group">
+
+                    <i>🔒</i>
+
+                    <input
+                        type="password"
+                        name="password2"
+                        placeholder="Confirm Password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="auth-btn"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- Login -->
+
+            <div class="bottom-text">
+
+                Already have an account?
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

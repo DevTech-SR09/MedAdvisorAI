@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAdvisor AI</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="header">
+    <nav class="navbar">
+
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="logo">
+            <i class="fas fa-heartbeat"></i>
+
+            <div class="logo-text">
+                <h2>MedAdvisor AI</h2>
+                <p>Predict • Prevent • Live Better</p>
+            </div>
+        </a>
+
+        <!-- Navigation -->
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Right Buttons -->
+        <div class="nav-btns">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'profile' %}" class="btn-outline">
+                    <i class="fas fa-user-circle"></i> Profile
+                </a>
+
+                <a href="{% url 'logout' %}" class="btn-fill">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}" class="btn-outline">
+                    Login
+                </a>
+
+                <a href="{% url 'signup' %}" class="btn-fill">
+                    Sign Up
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+</header>
+
+<!-- ================= PAGE CONTENT ================= -->
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer" id="contact">
+
+    <div class="footer-content">
+
+        <div class="footer-logo">
+            <h2>MedAdvisor AI</h2>
+            <p>Predict • Prevent • Live Better</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="copyright">
+            © 2026 MedAdvisor AI. All Rights Reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

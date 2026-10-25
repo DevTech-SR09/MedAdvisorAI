@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-container">
+
+        <!-- Left -->
+        <div class="hero-left">
+
+            <span class="hero-badge">AI Powered Healthcare</span>
+
+            <h1>
+                MedAdvisor AI:
+                <span>Multi-Agent Heart Disease Prediction</span>
+                and Personalized Healthcare Recommendation System
+            </h1>
+
+            <h3>Predict. Prevent. Live Better.</h3>
+
+            <p>
+                MedAdvisor AI leverages advanced machine learning to predict heart disease risk and provides personalized healthcare recommendations through intelligent Diet, Exercise, Specialist Consultation and Health Monitoring agents.
+            </p>
+
+            <div class="hero-buttons">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profile' %}" class="btn-primary">Get Started</a>
+                {% else %}
+                    <a href="{% url 'signup' %}" class="btn-primary">Get Started</a>
+                {% endif %}
+
+                <a href="#features" class="btn-secondary">Learn More</a>
+            </div>
+
+        </div>
+
+        <!-- Right -->
+        <div class="hero-right">
+
+            <div class="hero-image-box">
+
+                <!-- Doctor Background -->
+                <img src="{% static 'images/doctor-bg.png' %}"
+                     alt="Doctor"
+                     class="doctor-bg">
+
+                <!-- Floating cards -->
+                <div class="feature-card top-left">
+                    <div class="emoji">❤️</div>
+                    <span>Predict Risk</span>
+                </div>
+
+                <div class="feature-card top-right">
+                    <div class="emoji">👨‍⚕️</div>
+                    <span>Consult Experts</span>
+                </div>
+
+                <div class="feature-card bottom-left">
+                    <div class="emoji">🥗</div>
+                    <span>Diet Guidance</span>
+                </div>
+
+                <div class="feature-card bottom-right">
+                    <div class="emoji">📈</div>
+                    <span>Track Progress</span>
+                </div>
+
+                <!-- Heart -->
+                <img src="{% static 'images/heart.png' %}"
+                     alt="Heart"
+                     class="heart-center">
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+
+    <div class="section-title">
+        <h2>Our Features</h2>
+        <p>Everything you need for a healthier heart</p>
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature-box">
+            <div class="icon pink">❤️</div>
+            <h3>Risk Prediction</h3>
+            <p>AI-powered heart disease prediction using intelligent machine learning models.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="icon green">🥗</div>
+            <h3>Diet Agent</h3>
+            <p>Personalized cardiac diet recommendations based on patient health conditions.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="icon yellow">🏃</div>
+            <h3>Exercise Agent</h3>
+            <p>Daily fitness, activity tracking and healthy lifestyle guidance.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="icon blue">📊</div>
+            <h3>Health Dashboard</h3>
+            <p>Monitor predictions, medical history and overall health progress.</p>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

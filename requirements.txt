@@ -1,0 +1,28 @@
+python manage.py runserver
+pip install django mysqlclient pandas numpy scikit-learn joblib
+python -m django --version 
+django-admin startproject config .//create a new Django project named 'config' in the current directory
+python -m venv .venv
+python manage.py startapp accounts
+python manage.py startapp patients
+python manage.py startapp prediction
+python manage.py startapp recommendations
+python manage.py startapp dashboard
+pip install psycopg[binary]
+python manage.py makemigrations//
+python manage.py migrate
+http://127.0.0.1:8000/admin/login/?next=/admin/
+python manage.py createsuperuser //admin access
+type nul > inspect_datasets.py//creating a new file through command prompt 
+code inspect_datasets.py//opening the file in VS code
+python inspect_datasets.py//inspecting the datasets
+mkdir ml//creating a new directory named 'ml' for machine learning models creating a new folders
+python -c "import pandas, numpy, sklearn, joblib; print('ML libraries ready')"//checking if the required ML libraries are installed and ready to use 
+del train_cardio_model.py
+type nul > generate_medadvisor_dataset.py
+d:\MedAdvisorAI\.venv\Scripts\activate.bat
+.venv\Scripts\activate 
+python test_predictor.py //running the test_predictor.py script to test the prediction functionality   
+python check_model.py//running the check_model.py script to verify the model's performance and accuracy
+python -m pip install shap//install SHAP library for model interpretability
+python -m ml.explainability//to check the explainability of the model using SHAP

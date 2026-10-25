@@ -1,0 +1,203 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAdvisor AI - Explainable AI</title>
+    <link rel="stylesheet" href="{% static 'css/assessment.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <div>
+        <div class="logo">♥ MedAdvisor AI</div>
+        <div class="tagline">Predict • Prevent • Live Better</div>
+    </div>
+
+    <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="{% url 'profile' %}" class="profile-btn">Profile</a>
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </nav>
+</header>
+
+<main class="main-container">
+
+    <section class="xai-section">
+
+        <h2 class="xai-heading">
+            Explainable AI (SHAP)
+        </h2>
+
+        <p class="xai-description">
+            The following features show how the trained model's output
+            is influenced for this particular assessment. HbA1c and
+            ECG-related features are highlighted below.
+        </p>
+
+        {% if xai_error %}
+            <div class="xai-error">{{ xai_error }}</div>
+        {% endif %}
+
+        {% if xai_result %}
+
+            <h3 style="color:#173e7b; margin-bottom:18px;">
+                Feature Contributions
+            </h3>
+
+            {% for feature in xai_result.top_features %}
+
+                <div class="xai-feature">
+
+                    <div class="xai-feature-header">
+                        <span class="xai-feature-name">
+                            {{ feature.display_name }}
+                        </span>
+
+                        <span class="xai-value"
+                              style="color:{{ feature.bar_color }};">
+                            {{ feature.contribution|floatformat:5 }}
+                        </span>
+                    </div>
+
+                    <div class="xai-bar-track">
+                        <div class="xai-bar"
+                             style="width:{{ feature.bar_width }}%; background:{{ feature.bar_color }};">
+                        </div>
+                    </div>
+
+                    <div class="xai-direction">
+                        {{ feature.direction_label }}
+                    </div>
+
+                </div>
+
+            {% empty %}
+                <p>No feature contributions are available.</p>
+            {% endfor %}
+
+            <div class="xai-clinical-grid">
+
+                <div class="xai-clinical-card">
+                    <h3>HbA1c Explanation</h3>
+
+                    {% for feature in xai_result.hba1c_features %}
+
+                        <div class="xai-feature">
+
+                            <div class="xai-feature-header">
+                                <span class="xai-feature-name">
+                                    {{ feature.display_name }}
+                                </span>
+
+                                <span class="xai-value"
+                                      style="color:{{ feature.bar_color }};">
+                                    {{ feature.contribution|floatformat:5 }}
+                                </span>
+                            </div>
+
+                            <div class="xai-bar-track">
+                                <div class="xai-bar"
+                                     style="width:{{ feature.bar_width }}%; background:{{ feature.bar_color }};">
+                                </div>
+                            </div>
+
+                            <div class="xai-direction">
+                                {{ feature.direction_label }}
+                            </div>
+
+                        </div>
+
+                    {% empty %}
+                        <p>No HbA1c-related model features were found.</p>
+                    {% endfor %}
+                </div>
+
+                <div class="xai-clinical-card">
+                    <h3>ECG Explanation</h3>
+
+                    {% for feature in xai_result.ecg_features %}
+
+                        <div class="xai-feature">
+
+                            <div class="xai-feature-header">
+                                <span class="xai-feature-name">
+                                    {{ feature.display_name }}
+                                </span>
+
+                                <span class="xai-value"
+                                      style="color:{{ feature.bar_color }};">
+                                    {{ feature.contribution|floatformat:5 }}
+                                </span>
+                            </div>
+
+                            <div class="xai-bar-track">
+                                <div class="xai-bar"
+                                     style="width:{{ feature.bar_width }}%; background:{{ feature.bar_color }};">
+                                </div>
+                            </div>
+
+                            <div class="xai-direction">
+                                {{ feature.direction_label }}
+                            </div>
+
+                        </div>
+
+                    {% empty %}
+                        <p>No ECG-related model features were found.</p>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <div class="xai-note">
+                <strong>How to interpret SHAP:</strong>
+                Red represents a positive contribution toward class 1 model
+                output. Green represents a negative contribution. These values
+                are not probability percentages and do not establish medical
+                causation. A negative contribution does not mean a feature is
+                medically protective. This prototype is not a clinical diagnosis.
+            </div>
+
+        {% elif not xai_error %}
+
+            <p>The explanation has not been generated for this result.</p>
+
+        {% endif %}
+
+        <!-- Navigation buttons -->
+        <div class="button-row">
+
+            <a href="{% url 'recommendations' %}" class="button">
+                Previous
+            </a>
+
+            <a href="{% url 'profile' %}" class="button">
+                Finish
+            </a>
+
+            <!-- Keep Download PDF Report as the final button -->
+            <a href="{% url 'download_pdf_report' %}"
+               class="button"
+               style="background-color:#16803d; color:#ffffff;">
+                Download PDF Report
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-title">MedAdvisor AI</div>
+    <div class="footer-text">Predict • Prevent • Live Better</div>
+    <div class="footer-text">
+        © 2026 MedAdvisor AI. All Rights Reserved.
+    </div>
+</footer>
+
+</body>
+</html>

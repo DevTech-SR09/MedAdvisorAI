@@ -1,0 +1,27 @@
+MedAdvisorAI Cardiovascular Risk Model
+========================================
+
+Dataset:
+datasets/medadvisor_cardiovascular_synthetic_20000_v2.csv
+
+Total records: 20000
+Training records: 16000
+Testing records: 4000
+
+Best model: Hist Gradient Boosting
+
+Final Test Metrics
+------------------
+Accuracy : 0.9690 (96.90%)
+Precision: 0.9766 (97.66%)
+Recall   : 0.9583 (95.83%)
+F1 Score : 0.9674 (96.74%)
+ROC-AUC  : 0.9961 (99.61%)
+
+Confusion Matrix:
+[[2036   44]
+ [  80 1840]]
+
+IMPORTANT:
+This model was trained and evaluated on a synthetic dataset.
+The metrics represent synthetic-data benchmark performance and must not be interpreted as clinical validation.

@@ -1,0 +1,253 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MedAdvisor AI - Prediction</title>
+
+    <link rel="stylesheet" href="{% static 'css/assessment.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <div>
+        <div class="logo">♥ MedAdvisor AI</div>
+        <div class="tagline">Predict • Prevent • Live Better</div>
+    </div>
+
+    <nav class="nav-links">
+        <a href="/">Home</a>
+
+        <a href="{% url 'profile' %}" class="profile-btn">
+            Profile
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout-btn">
+            Logout
+        </a>
+    </nav>
+</header>
+
+<main class="main-container">
+
+    {% if error %}
+
+        <div class="page-error">
+            {{ error }}
+        </div>
+
+    {% else %}
+
+        <section class="prediction-card">
+
+            <!-- LEFT PANEL -->
+            <aside class="prediction-side">
+
+                <div class="heart-icon">♥</div>
+
+                <h2>AI Prediction</h2>
+
+                <p>
+                    Your entered health parameters have been analyzed
+                    by MedAdvisorAI.
+                </p>
+
+                <div class="side-score">
+
+                    <div class="side-score-title">
+                        Predicted Class 1 Probability
+                    </div>
+
+                    <div class="side-score-value">
+                        {{ probability_percent|floatformat:2 }}%
+                    </div>
+
+                </div>
+
+            </aside>
+
+            <!-- RIGHT PANEL -->
+            <div class="prediction-content">
+
+                <h1>Cardiovascular Risk Prediction</h1>
+
+                <p class="subtitle">
+                    AI-generated health assessment report
+                </p>
+
+                <!-- PATIENT AND HEALTH DETAILS -->
+                <div class="info-grid">
+
+                    <div class="info-item">
+                        <label>Patient Name</label>
+
+                        <div class="info-value">
+                            {{ profile.full_name|default:"Not provided" }}
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Age</label>
+
+                        <div class="info-value">
+                            {{ profile.age|default:"Not provided" }}
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>BMI</label>
+
+                        <div class="info-value">
+                            {% if bmi != None %}
+                                {{ bmi }}
+                            {% else %}
+                                Not available
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Predicted Class 1 Probability</label>
+
+                        <div class="info-value">
+                            {{ probability_percent|floatformat:2 }}%
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>HbA1c</label>
+
+                        <div class="info-value">
+                            {% if health.hba1c != None %}
+                                {{ health.hba1c }}%
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>ECG Result</label>
+
+                        <div class="info-value">
+                            {{ health.ecg_result|default:"Not provided" }}
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Blood Pressure</label>
+
+                        <div class="info-value">
+                            {{ health.blood_pressure|default:"Not provided" }}
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Heart Rate</label>
+
+                        <div class="info-value">
+                            {% if health.heart_rate %}
+                                {{ health.heart_rate }} bpm
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Cholesterol</label>
+
+                        <div class="info-value">
+                            {% if health.cholesterol != None %}
+                                {{ health.cholesterol }} mg/dL
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RISK CATEGORY -->
+                <div class="risk-section">
+
+                    <label>Model Risk Category</label>
+
+                    <div class="risk-badge"
+                         style="background: {{ risk_color|default:'#2463e9' }};">
+                        {{ risk_level|default:"Unavailable" }}
+                    </div>
+
+                </div>
+
+                <!-- AI RISK ASSESSMENT -->
+                <div class="ml-recommendation">
+
+                    <label>AI Risk Assessment</label>
+
+                    <div class="ml-recommendation-box">
+                        {{ recommendation|default:"No risk assessment available." }}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- MEDICAL DISCLAIMER -->
+        <div class="disclaimer">
+            <strong>Important:</strong>
+
+            MedAdvisorAI is an academic prototype. Its predictions are
+            not a medical diagnosis, prescription, or validated clinical
+            risk estimate. Consult a qualified healthcare professional
+            for medical advice.
+        </div>
+
+        <!-- NAVIGATION BUTTONS -->
+        <div class="button-row">
+
+            <a href="{% url 'health_form' %}" class="button">
+                Previous
+            </a>
+
+            <a href="{% url 'recommendations' %}" class="button">
+                Next
+            </a>
+
+            <!-- PDF DOWNLOAD BUTTON: LAST -->
+            <a href="{% url 'download_pdf_report' %}"
+               class="button"
+               style="background-color: #16803d; color: #ffffff;">
+                Download PDF Report
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="footer-title">
+        MedAdvisor AI
+    </div>
+
+    <div class="footer-text">
+        Predict • Prevent • Live Better
+    </div>
+
+    <div class="footer-text">
+        © 2026 MedAdvisor AI. All Rights Reserved.
+    </div>
+
+</footer>
+
+</body>
+</html>

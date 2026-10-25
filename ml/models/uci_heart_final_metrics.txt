@@ -1,0 +1,17 @@
+MEDADVISORAI - UCI HEART DISEASE MODEL
+============================================================
+
+Dataset: UCI Heart Disease - Cleveland
+Best Model: Logistic Regression
+
+Hold-out Test Metrics
+------------------------------------------------------------
+Accuracy : 0.8689 (86.89%)
+Precision: 0.8125 (81.25%)
+Recall   : 0.9286 (92.86%)
+F1 Score : 0.8667 (86.67%)
+ROC-AUC  : 0.9665
+
+Confusion Matrix
+[[27  6]
+ [ 2 26]]
