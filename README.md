@@ -536,12 +536,14 @@ MedAdvisorAI is intended to support health awareness and complement professional
 
 ---
 
-## 👨‍💻 Author
+👨‍💻 Author
 
-**GitHub Profile:** [DevTech-SR09](https://github.com/DevTech-SR09)
+Shreeram S R
 
-**Project Repository:** [MedAdvisorAI](https://github.com/DevTech-SR09/MedAdvisorAI)
+Final Year Software Engineering Student
 
----
+Python • Django • Machine Learning & Recommendation System • MultiAgents System
 
-⭐ If you find this project interesting, explore the repository and follow its development.
+⭐ Support
+
+If you found this project useful, consider giving it a Star ⭐ on GitHub!
